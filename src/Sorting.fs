@@ -1,5 +1,4 @@
 module Sorting
-
   let bubbleSort values =
     let rec bubble values =
       match values with
@@ -29,8 +28,17 @@ module Sorting
       | _::[] -> values
       | values -> List.fold insertOrdered [] values
 
-  // let selectionSort values = List.fold(fun (out, values) _ -> ) ([], values) values
-  //   let helper ordered values =
-  //     match values with
-  //       | [] -> ordered
-  //       | values ->  helper()::(List.min values)::ordered
+  let selectionSort values =
+    let rec helper ordered  values =
+      // printfn "ord: %A\n" ordered
+      // printfn "vals: %A\n" values
+      match values with
+        | [] -> ordered
+        | values ->
+          let minimum = List.min values
+          let withoutMin = Toolbox.ListTools.removeFirst minimum values
+          // printfn "min: %A\n" minimum
+          // printfn "withoutMin: %A\n" withoutMin
+          helper (ordered@[minimum]) withoutMin
+    
+    helper [] values
