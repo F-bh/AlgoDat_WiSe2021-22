@@ -1,5 +1,6 @@
 open System
 open Sorting
+open ListTools
 
 [<EntryPoint>]
 let main argv =
@@ -8,4 +9,5 @@ let main argv =
     let iSorted = insertionSort list
     printfn "bubblesort:\n %A\n" bSorted
     printfn "insertionsort:\n %A\n" iSorted
+
     0 

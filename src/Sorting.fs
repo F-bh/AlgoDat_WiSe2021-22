@@ -1,4 +1,5 @@
-module Sorting 
+module Sorting
+
   let bubbleSort values =
     let rec bubble values =
       match values with
@@ -27,3 +28,9 @@ module Sorting
       | [] -> values
       | _::[] -> values
       | values -> List.fold insertOrdered [] values
+
+  // let selectionSort values = List.fold(fun (out, values) _ -> ) ([], values) values
+  //   let helper ordered values =
+  //     match values with
+  //       | [] -> ordered
+  //       | values ->  helper()::(List.min values)::ordered
