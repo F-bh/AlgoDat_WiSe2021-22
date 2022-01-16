@@ -3,7 +3,7 @@ namespace Toolbox
     open System.Diagnostics
     //time a function that does something and print it's name
     let time (work: ('a -> 'b), parames: 'c, name: string ): 'd =
-      let timer = new Stopwatch()
+      let timer = Stopwatch()
       timer.Start()
       let res = work parames
       timer.Stop()
@@ -15,7 +15,7 @@ namespace Toolbox
       let rec helper toFind retValue found list = 
         match list with
         | [] -> if found then retValue else list
-        | x::[] -> retValue
+        | _::[] -> retValue
         | x::y::[] ->
           if x = toFind then
             if retValue.IsEmpty then

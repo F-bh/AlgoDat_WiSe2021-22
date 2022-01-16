@@ -30,15 +30,37 @@ module Sorting
 
   let selectionSort values =
     let rec helper ordered  values =
-      // printfn "ord: %A\n" ordered
-      // printfn "vals: %A\n" values
       match values with
         | [] -> ordered
         | values ->
           let minimum = List.min values
           let withoutMin = Toolbox.ListTools.removeFirst minimum values
-          // printfn "min: %A\n" minimum
-          // printfn "withoutMin: %A\n" withoutMin
           helper (ordered@[minimum]) withoutMin
     
     helper [] values
+
+  let rec quickSort values =
+    match values with
+      | [] -> []
+      | _::[] -> values
+      | x::xs -> 
+        let (left, right) = List.fold (fun (left, right) value -> if value <= x then (left@[value], right) else (left, right@[value])) ([], []) xs
+        (quickSort left)@x::(quickSort right)
+
+  let mergeSort values =
+    let rec merge (left, right) =
+      match (left, right) with
+      | ([], right) -> right
+      | (left, []) -> left
+      | (x::xs , y::ys) ->
+        if x <= y then
+          x::(merge(xs, y::ys))
+        else
+          y::(merge(x::xs, ys))
+    
+    match values with
+    | [] -> []
+    | _::[] -> values
+    | x::xs ->
+      let right = (fun sublist -> merge (([List.head sublist]), (List.tail sublist)))
+      List.fold (fun acc sublist -> merge (acc, right sublist)) [] (List.chunkBySize 2 values)
